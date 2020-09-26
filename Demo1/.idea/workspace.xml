@@ -16,6 +16,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="com.digi.micropython.xbee_platform" value="Digi XBee3 DigiMesh 2.4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="Demo1" type="XBeeMicroPythonConfigurationType" factoryName="XBee MicroPython" path="$PROJECT_DIR$" autoStart="true">
@@ -36,21 +37,25 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="285" key="GridCell.Tab.0.bottom" timestamp="1601145301799">
+    <state width="1899" height="284" key="GridCell.Tab.0.bottom" timestamp="1601155831701">
       <screen x="-1920" y="-323" width="1920" height="1050" />
     </state>
-    <state width="1899" height="285" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601145301799" />
-    <state width="1899" height="285" key="GridCell.Tab.0.center" timestamp="1601145301798">
+    <state width="1899" height="284" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601155831701" />
+    <state width="1345" height="182" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1601150094358" />
+    <state width="1899" height="284" key="GridCell.Tab.0.center" timestamp="1601155831701">
       <screen x="-1920" y="-323" width="1920" height="1050" />
     </state>
-    <state width="1899" height="285" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601145301798" />
-    <state width="1899" height="285" key="GridCell.Tab.0.left" timestamp="1601145301798">
+    <state width="1899" height="284" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601155831701" />
+    <state width="1345" height="182" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1601150094357" />
+    <state width="1899" height="284" key="GridCell.Tab.0.left" timestamp="1601155831701">
       <screen x="-1920" y="-323" width="1920" height="1050" />
     </state>
-    <state width="1899" height="285" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601145301798" />
-    <state width="1899" height="285" key="GridCell.Tab.0.right" timestamp="1601145301798">
+    <state width="1899" height="284" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601155831701" />
+    <state width="1345" height="182" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1601150094357" />
+    <state width="1899" height="284" key="GridCell.Tab.0.right" timestamp="1601155831701">
       <screen x="-1920" y="-323" width="1920" height="1050" />
     </state>
-    <state width="1899" height="285" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601145301798" />
+    <state width="1899" height="284" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601155831701" />
+    <state width="1345" height="182" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1601150094358" />
   </component>
 </project>

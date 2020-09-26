@@ -24,6 +24,7 @@
 import sys
 import xbee
 
+
 A = -34.3
 N = -24
 BASETEN = 10
@@ -36,15 +37,18 @@ class Transmitter:
     def ComputeDistance(self, rssi):
         return BASETEN ** ((rssi-A)/N)
 
+    # Display date in the form
+    # node id : rssi dBm, distance m
+    def DisplayData(self, device, distance):
+
+        string = ''.join([str(device['node_id']), " : ", str(device['rssi']), " dBm, ", str(distance), " m"])
+        print(string)
+
     def LocateDevice(self):
         for dev in xbee.discover():
             if dev['node_id'] in self.device_dict:
-                d = self.ComputeDistance(dev['rssi'])
-
-                print("Found device: {}".format(dev['node_id']))
-                print("rssi: {} dBm".format(dev['rssi']))
-                print("Distance: {} m".format(d))
-                print("\n")
+                dist = self.ComputeDistance(dev['rssi'])
+                self.DisplayData(dev, dist)
 
 
 device_dict = {
