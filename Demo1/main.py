@@ -18,7 +18,7 @@
 # Predict distance(m) of an object based on its RSSI(dBm)
 # RSSI = A - N * log(distance)
 # RSSI = -34.3 - 24log(distance)
-# distance = 10 ^ ((rssi+A)/N)
+# distance = 10 ^ ((rssi-A)/N)
 
 
 import sys
@@ -34,7 +34,7 @@ class Transmitter:
         self.device_dict = device_dict
 
     def ComputeDistance(self, rssi):
-        return BASETEN ** ((rssi+A)/N)
+        return BASETEN ** ((rssi-A)/N)
 
     def LocateDevice(self):
         for dev in xbee.discover():
@@ -44,11 +44,13 @@ class Transmitter:
                 print("Found device: {}".format(dev['node_id']))
                 print("rssi: {} dBm".format(dev['rssi']))
                 print("Distance: {} m".format(d))
+                print("\n")
 
 
 device_dict = {
     'RECEIVER1': 'RECEIVER1',
-    'RECEIVER2': 'RECEIVER1'
+    'RECEIVER2': 'RECEIVER2',
+    'RECEIVER3': 'RECEIVER3'
 }
 
 TX = Transmitter(device_dict)

@@ -35,4 +35,22 @@
     </task>
     <servers />
   </component>
+  <component name="WindowStateProjectService">
+    <state width="1899" height="285" key="GridCell.Tab.0.bottom" timestamp="1601145301799">
+      <screen x="-1920" y="-323" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="285" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601145301799" />
+    <state width="1899" height="285" key="GridCell.Tab.0.center" timestamp="1601145301798">
+      <screen x="-1920" y="-323" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="285" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601145301798" />
+    <state width="1899" height="285" key="GridCell.Tab.0.left" timestamp="1601145301798">
+      <screen x="-1920" y="-323" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="285" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601145301798" />
+    <state width="1899" height="285" key="GridCell.Tab.0.right" timestamp="1601145301798">
+      <screen x="-1920" y="-323" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="285" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601145301798" />
+  </component>
 </project>
