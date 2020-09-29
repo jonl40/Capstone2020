@@ -1,4 +1,5 @@
 # In xctu:
+  Update radio module firmware with: Digi XBee3 DigiMesh 2.4 version 300B  
   Load default settings  
   Set receivers with AP: API Mode Enabled [1]  
   Set receiver and transmitter devices with ID: 2018  
