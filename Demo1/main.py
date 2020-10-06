@@ -4,9 +4,9 @@
 # Set receivers with AP: API Mode Enabled [1]
 # Set receiver and transmitter devices with ID: 2018
 # Set receiver and transmitter devices with NT: 32
-# Set 1st receiver NI : RECEIVER1
-# Set 2nd receiver NI : RECEIVER2
-# Set 3rd receiver NI : RECEIVER3
+# Set 1st receiver NI : RECEIVER_A
+# Set 2nd receiver NI : RECEIVER_B
+# Set 3rd receiver NI : RECEIVER_C
 
 # Hardware set up:
 # Ensure jumper is on loopback (as is out of box)
@@ -54,9 +54,9 @@ class Transmitter:
 
 
 device_dict = {
-    'RECEIVER1': 'RECEIVER1',
-    'RECEIVER2': 'RECEIVER2',
-    'RECEIVER3': 'RECEIVER3'
+    'RECEIVER_A': 'RECEIVER_A',
+    'RECEIVER_B': 'RECEIVER_B',
+    'RECEIVER_C': 'RECEIVER_C'
 }
 
 TX = Transmitter(device_dict)
