@@ -1,11 +1,12 @@
 # In xctu:
-  Update radio module firmware with: Digi XBee3 DigiMesh 2.4 version 300B  
-  Load default settings  
-  Set receivers with AP: API Mode Enabled [1]  
-  Set receiver and transmitter devices with ID: 2018  
-  Set 1st receiver NI : RECEIVER1  
-  Set 2nd receiver NI : RECEIVER2  
-  Set 3rd receiver NI : RECEIVER3  
+Update radio module firmware with: Digi XBee3 DigiMesh 2.4 version 300B  
+Load default settings  
+Set receivers with AP: API Mode Enabled [1]  
+Set receiver and transmitter devices with ID: 2018  
+Set receiver and transmitter devices with NT: 32  
+Set 1st receiver NI : RECEIVER_A  
+Set 2nd receiver NI : RECEIVER_B  
+Set 3rd receiver NI : RECEIVER_C  
 
 # Hardware set up:
   Ensure jumper is on loopback (as is out of box)  
