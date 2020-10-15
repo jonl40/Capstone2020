@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4cc553a9-0d4a-49af-b8c7-e7208f9ac295" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1i1rIdL8NHLpRysDikGSLg5YnkE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.digi.micropython.xbee_platform" value="Digi XBee3 DigiMesh 2.4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Demo1" type="XBeeMicroPythonConfigurationType" factoryName="XBee MicroPython" path="$PROJECT_DIR$" autoStart="true">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4cc553a9-0d4a-49af-b8c7-e7208f9ac295" name="Default Changelist" comment="" />
+      <created>1601085860487</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601085860487</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1345" height="181" key="GridCell.Tab.0.bottom" timestamp="1602011718285">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1899" height="284" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601498341575" />
+    <state width="1345" height="181" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1602011718285" />
+    <state width="1345" height="181" key="GridCell.Tab.0.center" timestamp="1602011718285">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1899" height="284" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601498341575" />
+    <state width="1345" height="181" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1602011718285" />
+    <state width="1345" height="181" key="GridCell.Tab.0.left" timestamp="1602011718284">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1899" height="284" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601498341575" />
+    <state width="1345" height="181" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1602011718284" />
+    <state width="1345" height="181" key="GridCell.Tab.0.right" timestamp="1602011718285">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1899" height="284" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601498341575" />
+    <state width="1345" height="181" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1602011718285" />
+    <state x="467" y="245" key="com.intellij.ide.util.TipDialog" timestamp="1602010543578">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="-1264" y="26" key="com.intellij.ide.util.TipDialog/0.0.1366.738/-1920.-323.1920.1050@-1920.-323.1920.1050" timestamp="1601497529875" />
+    <state x="467" y="245" key="com.intellij.ide.util.TipDialog/0.0.1366.738/-1920.-323.1920.1050@0.0.1366.738" timestamp="1602010543578" />
+  </component>
+</project>
