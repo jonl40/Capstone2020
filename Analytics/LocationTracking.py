@@ -7,6 +7,18 @@ A = -34.3
 N = -24
 BASETEN = 10
 
+#rxA coordinates (0,0)
+Xa = 0 
+Ya = 0
+
+#rxB coordinates (0,3)
+Xb = 0
+Yb = 3 
+
+#rxC coordinates (5,3)
+Xc = 5
+Yc = 3 
+
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 os.chdir(THIS_FOLDER)
 
