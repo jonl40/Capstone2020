@@ -1,3 +1,11 @@
+# Xbee trilateration project:  
+Units of the coordinates are in meters     
+Place xbee Reciever A at coordinates (0,0)  
+Place xbee Reciever B at coordinates (0,3)  
+Place xbee Reciever C at coordinates (4,3)  
+Run Demo1/main.py code on Transmitter xbee being tracked  
+Use LocationTracking.py to graph the trilateration results  
+
 # In xctu:
 Update radio module firmware with: Digi XBee3 DigiMesh 2.4 version 300B  
 Load default settings  
