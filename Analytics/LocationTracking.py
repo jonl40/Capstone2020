@@ -15,8 +15,8 @@ Ya = 0
 Xb = 0
 Yb = 3 
 
-#rxC coordinates (5,3)
-Xc = 5
+#rxC coordinates (4,3)
+Xc = 4
 Yc = 3 
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -39,6 +39,7 @@ class XbeeTracker:
         self.x_coord = [] 
         self.y_coord = []
 
+
     def ReadFile(self):
         try:
             f = open(self.text_title, 'r')
@@ -49,15 +50,18 @@ class XbeeTracker:
             print('Error: {}\n'.format(e))
             sys.exit(-1)
 
+
     def SearchText(self):
 
         # RECEIVER_A : -30 dBm
         pattern = re.compile(r'(RECEIVER_\w)\s+:\s+(-?\d+)\s+dBm')
         self.matches = pattern.finditer(self.text_contents)
 
+
     def ComputeDistance(self, rssi_arr, dist_arr):
         for i in range(len(rssi_arr)):
             dist_arr.append(BASETEN ** ((rssi_arr[i]-A)/N))
+
 
     def Parse(self):
         self.ReadFile()
@@ -80,6 +84,20 @@ class XbeeTracker:
         self.ComputeDistance(self.rxB_rssi, self.rxB_dist)
         self.ComputeDistance(self.rxC_rssi, self.rxC_dist)
 
+
+    def Trilateration(self):
+        self.Parse()
+
+        for i in range(len(self.rxA_dist)):
+            Va = ((Xc**2 - Xb**2) + (Yc**2 - Yb**2)  + (self.rxB_dist[i]**2 - self.rxC_dist[i]**2))/2
+            Vb = ((Xa**2 - Xb**2) + (Ya**2 - Yb**2) + (self.rxB_dist[i]**2 - self.rxA_dist[i]**2))/2
+
+            y = (Vb*(Xb-Xc)-Va*(Xb-Xa))/((Ya-Yb)*(Xb-Xc)-(Yc-Yb)*(Xb-Xc))
+            x = (y*(Ya-Yb)-Vb)/(Xb-Xc)
+            self.x_coord.append(x)
+            self.y_coord.append(y)
+        
+    
         print('{}: {}'.format(self.rxA_id, self.rxA_rssi))
         print('{}: {}'.format(self.rxB_id, self.rxB_rssi))
         print('{}: {}'.format(self.rxC_id, self.rxC_rssi))
@@ -88,8 +106,9 @@ class XbeeTracker:
         print('{}: {}'.format(self.rxB_id, self.rxB_dist))
         print('{}: {}'.format(self.rxC_id, self.rxC_dist))
 
-
+        print('X coordinates: {}'.format(self.x_coord))
+        print('Y coordinates: {}'.format(self.y_coord))
 
 TX = XbeeTracker('Data2.txt')
-TX.Parse()
+TX.Trilateration()
     
