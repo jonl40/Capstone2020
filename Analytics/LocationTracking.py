@@ -2,6 +2,11 @@ import os
 import sys 
 import re 
 
+
+A = -34.3
+N = -24
+BASETEN = 10
+
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 os.chdir(THIS_FOLDER)
 
@@ -16,6 +21,11 @@ class XbeeTracker:
         self.rxA_rssi = [] 
         self.rxB_rssi = [] 
         self.rxC_rssi = []
+        self.rxA_dist = [] 
+        self.rxB_dist = [] 
+        self.rxC_dist = []
+        self.x_coord = [] 
+        self.y_coord = []
 
     def ReadFile(self):
         try:
@@ -33,6 +43,10 @@ class XbeeTracker:
         pattern = re.compile(r'(RECEIVER_\w)\s+:\s+(-?\d+)\s+dBm')
         self.matches = pattern.finditer(self.text_contents)
 
+    def ComputeDistance(self, rssi_arr, dist_arr):
+        for i in range(len(rssi_arr)):
+            dist_arr.append(BASETEN ** ((rssi_arr[i]-A)/N))
+
     def Parse(self):
         self.ReadFile()
         self.SearchText()
@@ -49,12 +63,21 @@ class XbeeTracker:
                 self.rxC_rssi.append(float(match.group(2)))
 
             #print('{}: {}'.format(match.group(1), match.group(2)))
+        
+        self.ComputeDistance(self.rxA_rssi, self.rxA_dist)
+        self.ComputeDistance(self.rxB_rssi, self.rxB_dist)
+        self.ComputeDistance(self.rxC_rssi, self.rxC_dist)
 
         print('{}: {}'.format(self.rxA_id, self.rxA_rssi))
         print('{}: {}'.format(self.rxB_id, self.rxB_rssi))
         print('{}: {}'.format(self.rxC_id, self.rxC_rssi))
 
+        print('{}: {}'.format(self.rxA_id, self.rxA_dist))
+        print('{}: {}'.format(self.rxB_id, self.rxB_dist))
+        print('{}: {}'.format(self.rxC_id, self.rxC_dist))
 
-TX = XbeeTracker('Data1.txt')
+
+
+TX = XbeeTracker('Data2.txt')
 TX.Parse()
     
