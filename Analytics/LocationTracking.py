@@ -1,6 +1,7 @@
 import os 
 import sys 
 import re 
+import matplotlib.pyplot as plt
 
 
 A = -34.3
@@ -85,6 +86,21 @@ class XbeeTracker:
         self.ComputeDistance(self.rxC_rssi, self.rxC_dist)
 
 
+    def PlotCoordinates(self):
+        plt.title('Trilateration Results')
+        #X coordinates, Y coordinates
+        plt.plot([Xa,Xb,Xc], [Ya,Yb,Yc], 'r^', label = 'Reciever')
+        #X coordinates, Y coordinates
+        plt.plot(self.x_coord, self.y_coord, 'bo-', label='Transmitter', linestyle='dashed')
+        #X min, X max, Y min, Y max
+        plt.axis([-1,5,-1,4])
+        #grid 
+        plt.grid()
+        #legend 
+        plt.legend() 
+        plt.show()
+
+
     def Trilateration(self):
         self.Parse()
 
@@ -108,6 +124,9 @@ class XbeeTracker:
 
         print('X coordinates: {}'.format(self.x_coord))
         print('Y coordinates: {}'.format(self.y_coord))
+
+        self.PlotCoordinates()
+
 
 TX = XbeeTracker('Data2.txt')
 TX.Trilateration()

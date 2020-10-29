@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots()
 plt.title('Test Set up')
 
 #X coordinates, Y coordinates
