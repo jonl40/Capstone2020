@@ -53,7 +53,6 @@ class XbeeTracker:
 
 
     def SearchText(self):
-
         # RECEIVER_A : -30 dBm
         pattern = re.compile(r'(RECEIVER_\w)\s+:\s+(-?\d+)\s+dBm')
         self.matches = pattern.finditer(self.text_contents)
