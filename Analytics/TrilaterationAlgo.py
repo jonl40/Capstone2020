@@ -2,6 +2,7 @@ import os
 import sys 
 import re 
 import matplotlib.pyplot as plt
+from math import sqrt 
 
 
 A = -34.3
@@ -41,50 +42,6 @@ class XbeeTracker:
         self.y_coord = []
 
 
-    def ReadFile(self):
-        try:
-            f = open(self.text_title, 'r')
-            self.text_contents = f.read()
-            #print(self.text_contents)
-            f.close() 
-        except Exception as e: 
-            print('Error: {}\n'.format(e))
-            sys.exit(-1)
-
-
-    def SearchText(self):
-        # RECEIVER_A : -30 dBm
-        pattern = re.compile(r'(RECEIVER_\w)\s+:\s+(-?\d+)\s+dBm')
-        self.matches = pattern.finditer(self.text_contents)
-
-
-    def ComputeDistance(self, rssi_arr, dist_arr):
-        for i in range(len(rssi_arr)):
-            dist_arr.append(BASETEN ** ((rssi_arr[i]-A)/N))
-
-
-    def Parse(self):
-        self.ReadFile()
-        self.SearchText()
-
-        print('----------Results----------\n')
-        for match in self.matches:
-            if self.rxA_id == match.group(1):
-                self.rxA_rssi.append(float(match.group(2)))
-
-            elif self.rxB_id == match.group(1):
-                self.rxB_rssi.append(float(match.group(2)))
-            
-            elif self.rxC_id == match.group(1):
-                self.rxC_rssi.append(float(match.group(2)))
-
-            #print('{}: {}'.format(match.group(1), match.group(2)))
-        
-        self.ComputeDistance(self.rxA_rssi, self.rxA_dist)
-        self.ComputeDistance(self.rxB_rssi, self.rxB_dist)
-        self.ComputeDistance(self.rxC_rssi, self.rxC_dist)
-
-
     def PlotCoordinates(self):
         plt.title('Trilateration Results')
         #X coordinates, Y coordinates
@@ -99,9 +56,23 @@ class XbeeTracker:
         plt.legend() 
         plt.show()
 
+    def ComputeDistance(self, x, y):
+        self.rxA_dist.append(sqrt((Xa-x)**2 + (Ya-y)**2))
+        self.rxB_dist.append(sqrt((Xb-x)**2 + (Yb-y)**2))
+        self.rxC_dist.append(sqrt((Xc-x)**2 + (Yc-y)**2))
 
     def Trilateration(self):
-        self.Parse()
+        #(3,2), (2,1), (4,0), (-1,2.5)
+        #self.rxA_dist = [3.606, 2.236, 4, 2.693]
+        #self.rxB_dist = [3.162, 2.828, 5, 1.118]
+        #self.rxC_dist = [1.414, 2.828, 3, 5.025]
+        self.ComputeDistance(3,2)
+        self.ComputeDistance(2,1)
+        self.ComputeDistance(4,0)
+        self.ComputeDistance(-1,2.5)
+        self.ComputeDistance(-1,4)
+        self.ComputeDistance(2,-1)
+
         size_rxA = len(self.rxA_dist)
         size_rxB = len(self.rxB_dist)
         size_rxC = len(self.rxC_dist)
@@ -112,6 +83,7 @@ class XbeeTracker:
             Vb = ((Xa**2 - Xb**2) + (Ya**2 - Yb**2) + (self.rxB_dist[i]**2 - self.rxA_dist[i]**2))/2
 
             y = (Vb*(Xb-Xc)-Va*(Xb-Xa))/((Ya-Yb)*(Xb-Xc)-(Yc-Yb)*(Xb-Xc))
+            #x = (y*(Ya-Yb)-Vb)/(Xb-Xc)
             x = -1 * (Va+y*(Yb-Yc))/(Xb-Xc)
             self.x_coord.append(x)
             self.y_coord.append(y)
