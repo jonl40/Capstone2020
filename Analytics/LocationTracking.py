@@ -103,8 +103,12 @@ class XbeeTracker:
 
     def Trilateration(self):
         self.Parse()
-
-        for i in range(len(self.rxA_dist)):
+        size_rxA = len(self.rxA_dist)
+        size_rxB = len(self.rxB_dist)
+        size_rxC = len(self.rxC_dist)
+        i = 0
+        
+        while i < size_rxA and i < size_rxB and i < size_rxC:
             Va = ((Xc**2 - Xb**2) + (Yc**2 - Yb**2)  + (self.rxB_dist[i]**2 - self.rxC_dist[i]**2))/2
             Vb = ((Xa**2 - Xb**2) + (Ya**2 - Yb**2) + (self.rxB_dist[i]**2 - self.rxA_dist[i]**2))/2
 
@@ -112,6 +116,8 @@ class XbeeTracker:
             x = (y*(Ya-Yb)-Vb)/(Xb-Xc)
             self.x_coord.append(x)
             self.y_coord.append(y)
+
+            i += 1 
         
     
         print('{}: {}'.format(self.rxA_id, self.rxA_rssi))
