@@ -2,10 +2,11 @@ import os
 import sys 
 import re 
 import matplotlib.pyplot as plt
+from math import exp 
 
 
-A = -34.3
-N = -24
+A = -33.874
+N = -17.27
 BASETEN = 10
 
 #rxA coordinates (0,0)
@@ -60,7 +61,7 @@ class XbeeTracker:
 
     def ComputeDistance(self, rssi_arr, dist_arr):
         for i in range(len(rssi_arr)):
-            dist_arr.append(BASETEN ** ((rssi_arr[i]-A)/N))
+            dist_arr.append(exp((rssi_arr[i]-A)/N))
 
 
     def Parse(self):
@@ -92,7 +93,7 @@ class XbeeTracker:
         #X coordinates, Y coordinates
         plt.plot(self.x_coord, self.y_coord, 'bo-', label='Transmitter', linestyle='dashed')
         #X min, X max, Y min, Y max
-        plt.axis([-1,5,-1,4])
+        plt.axis([-3,7,-3,6])
         #grid 
         plt.grid()
         #legend 
@@ -130,14 +131,9 @@ class XbeeTracker:
         print('X coordinates: {}'.format(self.x_coord))
         print('Y coordinates: {}'.format(self.y_coord))
 
-        print(x)
-        print(y)
-        print(Va)
-        print(Vb)
-
         self.PlotCoordinates()
 
 
-TX = XbeeTracker('Data2.txt')
+TX = XbeeTracker(r'RawData\Data(4,0)one.txt')
 TX.Trilateration()
     
