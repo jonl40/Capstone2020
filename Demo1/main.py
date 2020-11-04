@@ -23,13 +23,12 @@
 # distance = 10 ^ ((rssi-A)/N)
 
 
-import sys
 import xbee
 
 
-A = -34.3
-N = -24
-BASETEN = 10
+A = -33.874
+N = -17.27
+EULER = 2.718281828
 
 
 class Transmitter:
@@ -37,7 +36,7 @@ class Transmitter:
         self.device_dict = device_dict
 
     def ComputeDistance(self, rssi):
-        return BASETEN ** ((rssi-A)/N)
+        return EULER**((rssi-A)/N)
 
     # Display date in the form
     # node id : rssi dBm, distance m
