@@ -7,7 +7,6 @@ from math import exp
 
 A = -33.874
 N = -17.27
-BASETEN = 10
 
 #rxA coordinates (0,0)
 Xa = 0 
