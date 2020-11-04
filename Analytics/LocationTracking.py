@@ -92,7 +92,7 @@ class XbeeTracker:
         #X coordinates, Y coordinates
         plt.plot(self.x_coord, self.y_coord, 'bo-', label='Transmitter', linestyle='dashed')
         #X min, X max, Y min, Y max
-        plt.axis([-3,7,-3,6])
+        plt.axis([-1,6,-5,5])
         #grid 
         plt.grid()
         #legend 
