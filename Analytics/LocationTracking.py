@@ -4,9 +4,11 @@ import re
 import matplotlib.pyplot as plt
 from math import exp 
 
+#A = -33.874
+#N = -17.27
 
-A = -33.874
-N = -17.27
+A = -31.692
+N = -16.11
 
 #rxA coordinates (0,0)
 Xa = 0 
@@ -133,6 +135,6 @@ class XbeeTracker:
         self.PlotCoordinates()
 
 
-TX = XbeeTracker(r'RawData\Data(4,0)one.txt')
+TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
 TX.Trilateration()
     
