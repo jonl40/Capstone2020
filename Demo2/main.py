@@ -23,6 +23,7 @@
 # To log data in XCTU set AP to API Mode Without Escapes [1]
 
 import xbee
+import time
 import uio
 import uos
 
@@ -34,31 +35,38 @@ LOG_DATA = True
 LOG_FILE = "rssiData.log"
 
 class Transmitter:
-    def __init__(self, device_dict, log):
+    def __init__(self, device_dict, log_info):
         self.device_dict = device_dict
-        self.log = log
+        self.log_info = log_info
+        self.arr = []
 
     def ComputeDistance(self, rssi):
         return EULER**((rssi-A)/N)
 
     # Display date in the form
     # node id : rssi dBm, distance m
-    def DisplayData(self, device, distance):
-
-        string = ''.join([str(device['node_id']), " : ", str(device['rssi']), " dBm, ", str(distance), " m"])
+    def DisplayData(self, device, distance=None):
+        string = ''.join([str(device['node_id']), " : ", str(device['rssi']), " dBm"])
         print(string)
         if LOG_DATA:
-            # f.write(string)
+            self.arr.append(string)
+
+    def LogData(self):
+        if self.log_info == True:
+            n = len(self.arr)
             with uio.open(LOG_FILE, mode="a") as log:
-                # Write the current data in the log file.
-                log.write(string)
-                log.close()
+                for i in range(n):
+                    dummy = log.write("%s\n" % (self.arr[i]))
+        else:
+            n = len(self.arr)
+            for i in range(n):
+                print("%s\n" %self.arr[i])
 
     def LocateDevice(self):
         for dev in xbee.discover():
             if dev['node_id'] in self.device_dict:
-                dist = self.ComputeDistance(dev['rssi'])
-                self.DisplayData(dev, dist)
+                self.DisplayData(dev)
+
 
 device_dict = {
     'RECEIVER_A': 'RECEIVER_A',
@@ -67,7 +75,7 @@ device_dict = {
 }
 
 def DeleteOldFile(log):
-    if log:
+    if log == True:
         # delete existing log file if it exists
         try:
             log = uio.open(LOG_FILE)
@@ -83,3 +91,5 @@ DeleteOldFile(LOG_DATA)
 TX = Transmitter(device_dict, LOG_DATA)
 for i in range(5):
     TX.LocateDevice()
+
+TX.LogData()
