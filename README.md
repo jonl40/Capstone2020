@@ -1,3 +1,8 @@
+# RSSI Kalman Filtering:  
+From philipiv  
+https://github.com/philipiv/rssi-filtering-kalman  
+
+
 # Xbee trilateration project:  
 Units of the coordinates are in meters     
 Place xbee Reciever A at coordinates (0,0)  
@@ -36,3 +41,4 @@ Set 3rd receiver NI : RECEIVER_C
   Node Positioning in ZigBee Network Using Trilateration Method Based on the Received Signal Strength Indicator (RSSI)  
   R. Mardeni, Shaifull Othman:    
   https://www.researchgate.net/publication/265937701_Node_Positioning_in_ZigBee_Network_Using_Trilateration_Method_Based_on_the_Received_Signal_Strength_Indicator_RSSI  
+  
