@@ -7,8 +7,8 @@ from math import exp
 #A = -33.874
 #N = -17.27
 
-A = -31.692
-N = -16.11
+A = -24.67
+N = -27.74
 
 #rxA coordinates (0,0)
 Xa = 0 
@@ -135,6 +135,6 @@ class XbeeTracker:
         self.PlotCoordinates()
 
 
-TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
+TX = XbeeTracker(r'RawData\Elevated(4,0)_6.txt')
 TX.Trilateration()
     
