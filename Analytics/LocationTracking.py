@@ -4,6 +4,7 @@ import re
 import matplotlib.pyplot as plt
 from math import exp 
 import numpy as np
+import time 
 
 import smtplib 
 import imghdr
@@ -12,7 +13,7 @@ from email.message import EmailMessage
 EMAIL_ADDRESS = os.environ.get('EMAIL_USER')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
 RECIEVER = os.environ.get('EMAIL_RECIEVER')
-IMAGE = 'Trilateration.png'
+IMAGE_NAME = 'Trilateration.png'
 
 #A = -33.874
 #N = -17.27
@@ -120,7 +121,8 @@ class XbeeTracker:
         plt.grid()
         #legend 
         plt.legend() 
-        plt.savefig('Trilateration.png')
+        plt.savefig(IMAGE_NAME)
+        self.Notification()
         plt.show()
     
     def EventDetection(self):
@@ -165,7 +167,7 @@ class XbeeTracker:
             msg['To'] = RECIEVER
             msg.set_content('No problems detected')
 
-        with open(IMAGE, 'rb') as f:
+        with open(IMAGE_NAME, 'rb') as f:
             file_data = f.read()
             file_type = imghdr.what(f.name)
             file_name = f.name
@@ -210,7 +212,6 @@ class XbeeTracker:
         print('\n')
 
         self.EventDetection()
-        self.Notification()
         self.PlotCoordinates()
 
 
@@ -274,5 +275,5 @@ def kalman_filter(signal, A, H, Q, R):
 
     return predicted_signal
 
-TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
+TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
 TX.Trilateration()
