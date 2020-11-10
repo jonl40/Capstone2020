@@ -3,10 +3,13 @@ import sys
 import re 
 import matplotlib.pyplot as plt
 from math import exp 
+import numpy as np
 
+#A = -33.874
+#N = -17.27
 
-A = -33.874
-N = -17.27
+A = -24.67
+N = -27.74
 
 #rxA coordinates (0,0)
 Xa = 0 
@@ -19,6 +22,11 @@ Yb = 3
 #rxC coordinates (4,3)
 Xc = 4
 Yc = 3 
+
+MAX_X = 4
+MAX_Y = 3
+MIN_X = 0 
+MIN_Y = 0
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 os.chdir(THIS_FOLDER)
@@ -80,6 +88,10 @@ class XbeeTracker:
 
             #print('{}: {}'.format(match.group(1), match.group(2)))
         
+        self.rxA_rssi = kalman_filter(self.rxA_rssi, A=1, H=1, Q=1.6, R=6)
+        self.rxB_rssi = kalman_filter(self.rxB_rssi, A=1, H=1, Q=1.6, R=6)
+        self.rxC_rssi = kalman_filter(self.rxC_rssi, A=1, H=1, Q=1.6, R=6)
+        
         self.ComputeDistance(self.rxA_rssi, self.rxA_dist)
         self.ComputeDistance(self.rxB_rssi, self.rxB_dist)
         self.ComputeDistance(self.rxC_rssi, self.rxC_dist)
@@ -98,6 +110,27 @@ class XbeeTracker:
         #legend 
         plt.legend() 
         plt.show()
+    
+    def EventDetection(self):
+        j = 0 
+        size_x = len(self.x_coord)
+        size_y = len(self.y_coord)
+        ban_dict = {}
+
+        while j < size_x and j < size_y:
+            if self.x_coord[j] < MIN_X or self.x_coord[j] > MAX_X:
+                if j not in ban_dict:
+                    print('({},{}) event detected, transmitter left area'.format(self.x_coord[j],self.y_coord[j]))
+                    #assign arbitray value to dictionary key 
+                    ban_dict[j] = 0
+
+            if self.y_coord[j] < MIN_Y or self.y_coord[j] > MAX_Y:
+                if j not in ban_dict:
+                    print('({},{}) event detected, transmitter left area'.format(self.x_coord[j],self.y_coord[j]))
+                    #assign arbitray value to dictionary key 
+                    ban_dict[j] = 0
+            
+            j += 1
 
 
     def Trilateration(self):
@@ -129,10 +162,72 @@ class XbeeTracker:
 
         print('X coordinates: {}'.format(self.x_coord))
         print('Y coordinates: {}'.format(self.y_coord))
+        print('\n')
+
+        self.EventDetection()
 
         self.PlotCoordinates()
 
 
-TX = XbeeTracker(r'RawData\Data(4,0)one.txt')
+def kalman_block(x, P, s, A, H, Q, R):
+
+    """
+    Prediction and update in Kalman filter
+
+    input:
+        - signal: signal to be filtered
+        - x: previous mean state
+        - P: previous variance state
+        - s: current observation
+        - A, H, Q, R: kalman filter parameters
+
+    output:
+        - x: mean state prediction
+        - P: variance state prediction
+
+    """
+
+    # check laaraiedh2209 for further understand these equations
+
+    x_mean = A * x + np.random.normal(0, Q, 1)
+    P_mean = A * P * A + Q
+
+    K = P_mean * H * (1 / (H * P_mean * H + R))
+    x = x_mean + K * (s - H * x_mean)
+    P = (1 - K * H) * P_mean
+
+    return x, P
+
+
+def kalman_filter(signal, A, H, Q, R):
+
+    """
+
+    Implementation of Kalman filter.
+    Takes a signal and filter parameters and returns the filtered signal.
+
+    input:
+        - signal: signal to be filtered
+        - A, H, Q, R: kalman filter parameters
+
+    output:
+        - filtered signal
+
+    """
+
+    predicted_signal = []
+
+    x = signal[0]                                 # takes first value as first filter prediction
+    P = 0                                         # set first covariance state value to zero
+
+    predicted_signal.append(x)
+    for j, s in enumerate(signal[1:]):            # iterates on the entire signal, except the first element
+
+        x, P = kalman_block(x, P, s, A, H, Q, R)  # calculates next state prediction
+
+        predicted_signal.append(x)                # update predicted signal with this step calculation
+
+    return predicted_signal
+
+TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
 TX.Trilateration()
-    
