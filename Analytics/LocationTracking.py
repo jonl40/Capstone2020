@@ -163,7 +163,7 @@ class XbeeTracker:
             msg['Subject'] = 'Capstone Location Tracker'
             msg['From'] = EMAIL_ADDRESS
             msg['To'] = RECIEVER
-            msg.set_content(self.body)
+            msg.set_content('No problems detected')
 
         with open(IMAGE, 'rb') as f:
             file_data = f.read()
@@ -274,5 +274,5 @@ def kalman_filter(signal, A, H, Q, R):
 
     return predicted_signal
 
-TX = XbeeTracker(r'RawData\Elevated(4,0)_6.txt')
+TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
 TX.Trilateration()
