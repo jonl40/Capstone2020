@@ -23,6 +23,11 @@ Yb = 3
 Xc = 4
 Yc = 3 
 
+MAX_X = 4
+MAX_Y = 3
+MIN_X = 0 
+MIN_Y = 0
+
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 os.chdir(THIS_FOLDER)
 
@@ -105,6 +110,27 @@ class XbeeTracker:
         #legend 
         plt.legend() 
         plt.show()
+    
+    def EventDetection(self):
+        j = 0 
+        size_x = len(self.x_coord)
+        size_y = len(self.y_coord)
+        ban_dict = {}
+
+        while j < size_x and j < size_y:
+            if self.x_coord[j] < MIN_X or self.x_coord[j] > MAX_X:
+                if j not in ban_dict:
+                    print('({},{}) event detected, transmitter left area'.format(self.x_coord[j],self.y_coord[j]))
+                    #assign arbitray value to dictionary key 
+                    ban_dict[j] = 0
+
+            if self.y_coord[j] < MIN_Y or self.y_coord[j] > MAX_Y:
+                if j not in ban_dict:
+                    print('({},{}) event detected, transmitter left area'.format(self.x_coord[j],self.y_coord[j]))
+                    #assign arbitray value to dictionary key 
+                    ban_dict[j] = 0
+            
+            j += 1
 
 
     def Trilateration(self):
@@ -136,6 +162,9 @@ class XbeeTracker:
 
         print('X coordinates: {}'.format(self.x_coord))
         print('Y coordinates: {}'.format(self.y_coord))
+        print('\n')
+
+        self.EventDetection()
 
         self.PlotCoordinates()
 
@@ -202,4 +231,3 @@ def kalman_filter(signal, A, H, Q, R):
 
 TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
 TX.Trilateration()
-    
