@@ -4,6 +4,16 @@ import re
 import matplotlib.pyplot as plt
 from math import exp 
 import numpy as np
+import time 
+
+import smtplib 
+import imghdr
+from email.message import EmailMessage 
+
+EMAIL_ADDRESS = os.environ.get('EMAIL_USER')
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+RECIEVER = os.environ.get('EMAIL_RECIEVER')
+IMAGE_NAME = 'Trilateration.png'
 
 #A = -33.874
 #N = -17.27
@@ -47,6 +57,8 @@ class XbeeTracker:
         self.rxC_dist = []
         self.x_coord = [] 
         self.y_coord = []
+        self.body = ''
+        self.event_detected = False 
 
 
     def ReadFile(self):
@@ -109,6 +121,8 @@ class XbeeTracker:
         plt.grid()
         #legend 
         plt.legend() 
+        plt.savefig(IMAGE_NAME)
+        self.Notification()
         plt.show()
     
     def EventDetection(self):
@@ -116,21 +130,54 @@ class XbeeTracker:
         size_x = len(self.x_coord)
         size_y = len(self.y_coord)
         ban_dict = {}
+        msg = []
 
         while j < size_x and j < size_y:
             if self.x_coord[j] < MIN_X or self.x_coord[j] > MAX_X:
                 if j not in ban_dict:
-                    print('({},{}) event detected, transmitter left area'.format(self.x_coord[j],self.y_coord[j]))
+                    msg.append('(%f,%f) event detected, transmitter left area\n' %(self.x_coord[j],self.y_coord[j]))
                     #assign arbitray value to dictionary key 
                     ban_dict[j] = 0
+                    self.event_detected = True 
 
             if self.y_coord[j] < MIN_Y or self.y_coord[j] > MAX_Y:
                 if j not in ban_dict:
-                    print('({},{}) event detected, transmitter left area'.format(self.x_coord[j],self.y_coord[j]))
+                    msg.append('(%f,%f) event detected, transmitter left area\n' %(self.x_coord[j],self.y_coord[j]))
                     #assign arbitray value to dictionary key 
                     ban_dict[j] = 0
+                    self.event_detected = True 
             
             j += 1
+
+        self.body = ''.join(msg)
+        print(self.body)
+
+    def Notification(self):
+        if self.event_detected == True:
+            msg = EmailMessage()
+            msg['Subject'] = 'EMERGENCY Event Detected Capstone Location Tracker'
+            msg['From'] = EMAIL_ADDRESS
+            msg['To'] = RECIEVER
+            msg.set_content(self.body)
+        
+        else:
+            msg = EmailMessage()
+            msg['Subject'] = 'Capstone Location Tracker'
+            msg['From'] = EMAIL_ADDRESS
+            msg['To'] = RECIEVER
+            msg.set_content('No problems detected')
+
+        with open(IMAGE_NAME, 'rb') as f:
+            file_data = f.read()
+            file_type = imghdr.what(f.name)
+            file_name = f.name
+
+        msg.add_attachment(file_data, maintype='image',subtype=file_type, filename=file_name)
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            smtp.send_message(msg)
 
 
     def Trilateration(self):
@@ -165,7 +212,6 @@ class XbeeTracker:
         print('\n')
 
         self.EventDetection()
-
         self.PlotCoordinates()
 
 
