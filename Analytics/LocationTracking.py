@@ -124,7 +124,8 @@ class XbeeTracker:
         plt.savefig(IMAGE_NAME)
         self.Notification()
         plt.show()
-    
+     
+     
     def EventDetection(self):
         j = 0 
         size_x = len(self.x_coord)
@@ -151,6 +152,7 @@ class XbeeTracker:
 
         self.body = ''.join(msg)
         print(self.body)
+
 
     def Notification(self):
         if self.event_detected == True:
