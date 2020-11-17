@@ -4,7 +4,6 @@ import re
 import matplotlib.pyplot as plt
 from math import exp 
 import numpy as np
-import time 
 
 import smtplib 
 import imghdr
@@ -12,7 +11,7 @@ from email.message import EmailMessage
 
 EMAIL_ADDRESS = os.environ.get('EMAIL_USER')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
-RECIEVER = os.environ.get('EMAIL_RECIEVER')
+RECIEVER = [os.environ.get('EMAIL_RECIEVER1'), os.environ.get('EMAIL_RECIEVER2')]
 IMAGE_NAME = 'Trilateration.png'
 
 #A = -33.874
@@ -125,7 +124,7 @@ class XbeeTracker:
         self.Notification()
         plt.show()
      
-     
+
     def EventDetection(self):
         j = 0 
         size_x = len(self.x_coord)
