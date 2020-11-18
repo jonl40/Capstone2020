@@ -113,7 +113,7 @@ class XbeeTracker:
         fig = plt.figure() 
         ax = fig.add_subplot(111) 
         plt.title('Trilateration Results')
-        ax.add_patch(Rectangle((Xa,Ya),4,3,edgecolor='green', facecolor = 'green',fill=True))
+        ax.add_patch(Rectangle((Xa,Ya),4,3,edgecolor='green', facecolor = 'green',fill=True, label = 'Safe Zone'))
         #X coordinates, Y coordinates
         plt.plot([Xa,Xb,Xc], [Ya,Yb,Yc], 'r^', label = 'Reciever')
         #X coordinates, Y coordinates
@@ -154,7 +154,7 @@ class XbeeTracker:
             j += 1
 
         self.body = ''.join(msg)
-        print(self.body)
+        #print(self.body)
 
 
     def Notification(self):
@@ -164,13 +164,25 @@ class XbeeTracker:
             msg['From'] = EMAIL_ADDRESS
             msg['To'] = RECIEVER
             msg.set_content(self.body)
+            print('EMERGENCY Event Detected Capstone Location Tracker\n')
+            print(self.body)
         
         else:
+            j = 0
+            location_text = []
+            size_x = len(self.x_coord)
+            size_y = len(self.y_coord)
+            while j < size_x and j < size_y:
+                location_text.append('(%f,%f) No problems detected, Transmitter in Safe Zone\n' %(self.x_coord[j],self.y_coord[j]))
+                j += 1
+            email_body = ''.join(location_text)
             msg = EmailMessage()
-            msg['Subject'] = 'Capstone Location Tracker'
+            msg['Subject'] = 'No problems detected Capstone Location Tracker'
             msg['From'] = EMAIL_ADDRESS
             msg['To'] = RECIEVER
-            msg.set_content('No problems detected')
+            msg.set_content(email_body)
+            print('No problems detected Capstone Location Tracker\n')
+            print(email_body)
 
         with open(IMAGE_NAME, 'rb') as f:
             file_data = f.read()
@@ -280,5 +292,7 @@ def kalman_filter(signal, A, H, Q, R):
 
     return predicted_signal
 
-TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
+TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
+#TX = XbeeTracker(r'RawData\Elevated(4,0)_6.txt')
+#TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
 TX.Trilateration()
