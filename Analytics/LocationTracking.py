@@ -2,6 +2,7 @@ import os
 import sys 
 import re 
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle 
 from math import exp 
 import numpy as np
 
@@ -109,7 +110,10 @@ class XbeeTracker:
 
 
     def PlotCoordinates(self):
+        fig = plt.figure() 
+        ax = fig.add_subplot(111) 
         plt.title('Trilateration Results')
+        ax.add_patch(Rectangle((Xa,Ya),4,3,edgecolor='green', facecolor = 'green',fill=True))
         #X coordinates, Y coordinates
         plt.plot([Xa,Xb,Xc], [Ya,Yb,Yc], 'r^', label = 'Reciever')
         #X coordinates, Y coordinates
