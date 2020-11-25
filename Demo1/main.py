@@ -1,5 +1,5 @@
 # In xctu:
-# Update radio module firmware with: Digi XBee3 DigiMesh 3.0 version 100B
+# Update radio module firmware with: Digi XBee3 Zigbee 3.0 version 100B
 # Load default settings
 # Transmitter CE (Device Role) Form Network [1]
 # Receivers CE (Device Role) Join Network [0]
