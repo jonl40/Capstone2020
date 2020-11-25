@@ -113,6 +113,8 @@ class XbeeTracker:
         fig = plt.figure() 
         ax = fig.add_subplot(111) 
         plt.title('Trilateration Results')
+        plt.xlabel("distance (m)")
+        plt.ylabel("distance (m)")
         ax.add_patch(Rectangle((Xa,Ya),4,3,edgecolor='green', facecolor = 'green',fill=True, label = 'Safe Zone'))
         #X coordinates, Y coordinates
         plt.plot([Xa,Xb,Xc], [Ya,Yb,Yc], 'r^', label = 'Reciever')
@@ -292,7 +294,7 @@ def kalman_filter(signal, A, H, Q, R):
 
     return predicted_signal
 
-TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
+#TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
 #TX = XbeeTracker(r'RawData\Elevated(4,0)_6.txt')
-#TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
+TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
 TX.Trilateration()
