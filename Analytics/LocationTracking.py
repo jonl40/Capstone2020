@@ -129,7 +129,7 @@ class XbeeTracker:
         plt.savefig(IMAGE_NAME)
         self.Notification()
         plt.show()
-     
+    
 
     def EventDetection(self):
         j = 0 
@@ -233,7 +233,7 @@ class XbeeTracker:
         self.EventDetection()
         self.PlotCoordinates()
 
-
+# https://github.com/philipiv/rssi-filtering-kalman
 def kalman_block(x, P, s, A, H, Q, R):
 
     """
@@ -263,7 +263,7 @@ def kalman_block(x, P, s, A, H, Q, R):
 
     return x, P
 
-
+# https://github.com/philipiv/rssi-filtering-kalman
 def kalman_filter(signal, A, H, Q, R):
 
     """
@@ -296,5 +296,6 @@ def kalman_filter(signal, A, H, Q, R):
 
 #TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
 #TX = XbeeTracker(r'RawData\Elevated(4,0)_6.txt')
-TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
+#TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
+TX = XbeeTracker(r'RawData\Z_Elevated(4,0)_5.txt')
 TX.Trilateration()
