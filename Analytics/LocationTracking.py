@@ -18,8 +18,12 @@ IMAGE_NAME = 'Trilateration.png'
 #A = -33.874
 #N = -17.27
 
-A = -24.67
-N = -27.74
+#A = -24.67
+#N = -27.74
+
+A = -27.773 
+N = -10.43
+
 
 #rxA coordinates (0,0)
 Xa = 0 
@@ -100,9 +104,13 @@ class XbeeTracker:
 
             #print('{}: {}'.format(match.group(1), match.group(2)))
         
-        self.rxA_rssi = kalman_filter(self.rxA_rssi, A=1, H=1, Q=1.6, R=6)
-        self.rxB_rssi = kalman_filter(self.rxB_rssi, A=1, H=1, Q=1.6, R=6)
-        self.rxC_rssi = kalman_filter(self.rxC_rssi, A=1, H=1, Q=1.6, R=6)
+        #self.rxA_rssi = kalman_filter(self.rxA_rssi, A=1, H=1, Q=1.6, R=6)
+        #self.rxB_rssi = kalman_filter(self.rxB_rssi, A=1, H=1, Q=1.6, R=6)
+        #self.rxC_rssi = kalman_filter(self.rxC_rssi, A=1, H=1, Q=1.6, R=6)
+
+        self.rxA_rssi = kalman_filter(self.rxA_rssi, A=1, H=1, Q=1, R=1)
+        self.rxB_rssi = kalman_filter(self.rxB_rssi, A=1, H=1, Q=1, R=1)
+        self.rxC_rssi = kalman_filter(self.rxC_rssi, A=1, H=1, Q=1, R=1)
         
         self.ComputeDistance(self.rxA_rssi, self.rxA_dist)
         self.ComputeDistance(self.rxB_rssi, self.rxB_dist)
@@ -127,7 +135,7 @@ class XbeeTracker:
         #legend 
         plt.legend() 
         plt.savefig(IMAGE_NAME)
-        self.Notification()
+        #self.Notification()
         plt.show()
     
 
@@ -294,8 +302,5 @@ def kalman_filter(signal, A, H, Q, R):
 
     return predicted_signal
 
-#TX = XbeeTracker(r'RawData\Elevated(4,0)_2.txt')
-#TX = XbeeTracker(r'RawData\Elevated(4,0)_6.txt')
-#TX = XbeeTracker(r'RawData\Elevated(4,0)_5.txt')
-TX = XbeeTracker(r'RawData\Z_Elevated(4,0)_5.txt')
+TX = XbeeTracker(r'RawData\Z_Elevated(4,0)_3.txt')
 TX.Trilateration()
