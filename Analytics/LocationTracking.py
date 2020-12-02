@@ -21,9 +21,11 @@ IMAGE_NAME = 'Trilateration.png'
 #A = -24.67
 #N = -27.74
 
-A = -27.773 
-N = -10.43
+#A = -27.773 
+#N = -10.43
 
+A = -24.514
+N = -15.41
 
 #rxA coordinates (0,0)
 Xa = 0 
@@ -302,5 +304,5 @@ def kalman_filter(signal, A, H, Q, R):
 
     return predicted_signal
 
-TX = XbeeTracker(r'RawData\Z_Elevated(4,0)_3.txt')
+TX = XbeeTracker(r'RawData\Z_Elevated(3,1)_3.txt')
 TX.Trilateration()
