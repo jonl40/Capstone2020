@@ -36,11 +36,10 @@ Set 3rd receiver NI : RECEIVER_C
   Predict distance(m) of an object based on its RSSI(dBm)  
   RSSI = A + N * ln(distance)  
   RSSI = -33.874 - 17.27ln(distance)    
+  Your A and N values will vary!
   A = -24.514   
   N = -15.41    
   distance = e ^ ((rssi-A)/N)    
-  
-  Your A and N values will vary!
   
   Node Positioning in ZigBee Network Using Trilateration Method Based on the Received Signal Strength Indicator (RSSI)  
   R. Mardeni, Shaifull Othman:    
