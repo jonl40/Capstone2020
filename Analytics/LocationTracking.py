@@ -12,7 +12,7 @@ from email.message import EmailMessage
 
 EMAIL_ADDRESS = os.environ.get('EMAIL_USER')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
-RECIEVER = [os.environ.get('EMAIL_RECIEVER1'), os.environ.get('EMAIL_RECIEVER2')]
+RECEIVER = [os.environ.get('EMAIL_RECIEVER1'), os.environ.get('EMAIL_RECIEVER2')]
 IMAGE_NAME = 'Trilateration.png'
 
 #A = -33.874
@@ -137,7 +137,7 @@ class XbeeTracker:
         #legend 
         plt.legend() 
         plt.savefig(IMAGE_NAME)
-        #self.Notification()
+        self.Notification()
         plt.show()
     
 
@@ -174,7 +174,7 @@ class XbeeTracker:
             msg = EmailMessage()
             msg['Subject'] = 'EMERGENCY Event Detected Capstone Location Tracker'
             msg['From'] = EMAIL_ADDRESS
-            msg['To'] = RECIEVER
+            msg['To'] = RECEIVER
             msg.set_content(self.body)
             print('EMERGENCY Event Detected Capstone Location Tracker\n')
             print(self.body)
@@ -191,7 +191,7 @@ class XbeeTracker:
             msg = EmailMessage()
             msg['Subject'] = 'No problems detected Capstone Location Tracker'
             msg['From'] = EMAIL_ADDRESS
-            msg['To'] = RECIEVER
+            msg['To'] = RECEIVER
             msg.set_content(email_body)
             print('No problems detected Capstone Location Tracker\n')
             print(email_body)
@@ -304,5 +304,7 @@ def kalman_filter(signal, A, H, Q, R):
 
     return predicted_signal
 
-TX = XbeeTracker(r'RawData\Z_Elevated(3,1)_3.txt')
+TX = XbeeTracker(r'RawData\Z_Elevated(4,0)_Filter3.txt')
+#TX = XbeeTracker(r'RawData\Z_Elevated(4,0)_4.txt')
+#TX = XbeeTracker(r'RawData\Z_Elevated(3,1)_1.txt')
 TX.Trilateration()
